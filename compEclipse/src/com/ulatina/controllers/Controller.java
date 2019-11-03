@@ -9,10 +9,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 public abstract class Controller{
-	private static EntityManagerFactory entityManagerFactory = null;
-	private static EntityManager em = null;
+	private EntityManagerFactory entityManagerFactory = null;
+	private EntityManager em = null;
 	
-	public static void startEntityManagerFactory() {
+	public EntityManager getEm() {
+		return em;
+	}
+
+	public void startEntityManagerFactory() {
 		if (entityManagerFactory == null) {
 			try {
 				entityManagerFactory = Persistence
@@ -24,7 +28,7 @@ public abstract class Controller{
 		}
 	}
 
-	public static void stopEntityManagerFactory() {
+	public void stopEntityManagerFactory() {
 		if (entityManagerFactory != null) {
 			if (entityManagerFactory.isOpen()) {
 				try {
