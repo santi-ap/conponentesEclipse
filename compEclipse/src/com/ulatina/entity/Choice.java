@@ -10,7 +10,14 @@ import javax.persistence.*;
  *
  */
 @Entity
-
+@NamedQueries (value = {
+		@NamedQuery(
+				name = "Choie.findAll", 
+				query = "SELECT c FROM Choice c"),
+		@NamedQuery(
+				name = "Choice.findOne", 
+				query = "SELECT c FROM Choice c WHERE c.id = :param ")
+})
 public class Choice implements Serializable {
 
 	   

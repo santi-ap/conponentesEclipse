@@ -2,10 +2,9 @@ package com.ulatina.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.TypedQuery;
-
 import com.ulatina.entity.Answer;
+
 @SuppressWarnings("finally")
 public class AnswerController extends Controller {
 

@@ -11,7 +11,14 @@ import javax.persistence.*;
  *
  */
 @Entity
-
+@NamedQueries (value = {
+		@NamedQuery(
+				name = "Type.findAll", 
+				query = "SELECT t FROM Type t"),
+		@NamedQuery(
+				name = "Type.findOne", 
+				query = "SELECT t FROM Type t WHERE t.id = :param ")
+})
 public class Type implements Serializable {
 
 	   
