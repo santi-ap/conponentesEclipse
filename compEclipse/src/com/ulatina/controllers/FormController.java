@@ -2,10 +2,12 @@ package com.ulatina.controllers;
 
 import java.util.ArrayList;
 
+import com.ulatina.entity.Form;
+
 public class FormController extends Controller {
 
 	@Override
-	public ArrayList<Object> selectAll() {
+	public ArrayList<Form> selectAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -17,15 +19,23 @@ public class FormController extends Controller {
 	}
 
 	@Override
-	public void update(String whichColumn, String newValue, String primaryColumn, String certainValue) {
+	public void update(Object o) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	public void delete(String primaryColumn, String certanValue) {
+	public void delete(Object o) {
 		// TODO Auto-generated method stub
-
+		
 	}
+
+	@Override
+	public void insert(Object o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 
 }

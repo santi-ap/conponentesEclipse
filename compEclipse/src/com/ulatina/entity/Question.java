@@ -3,7 +3,7 @@ package com.ulatina.entity;
 import com.ulatina.entity.Type;
 import java.io.Serializable;
 import java.lang.String;
-import java.util.ArrayList;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -16,16 +16,38 @@ import javax.persistence.*;
 public class Question implements Serializable {
 
 	   
-	@Id
+	@Id @GeneratedValue
 	private int id;
 	private String question;
+	
+	@OneToMany (mappedBy="question", cascade = CascadeType.ALL)
+	private Set<Choice> choiceList;
+	
+	@ManyToOne
+	@JoinColumn(name = "type_id", referencedColumnName="id")
 	private Type type;
-	private ArrayList<Answer> answerList;
+	
+	@OneToMany (mappedBy="question", cascade = CascadeType.ALL)
+	private Set<Answer> answerList;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_form", referencedColumnName="id")
+	private Form form;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Question() {
 		super();
-	}   
+	} 
+	
+	public Form getForm() {
+		return form;
+	}
+
+	public void setForm(Form form) {
+		this.form = form;
+	}
+
 	public int getId() {
 		return this.id;
 	}
@@ -47,10 +69,10 @@ public class Question implements Serializable {
 	public void setType(Type type) {
 		this.type = type;
 	}
-	public ArrayList<Answer> getAnswerList() {
+	public Set<Answer> getAnswerList() {
 		return answerList;
 	}
-	public void setAnswerList(ArrayList<Answer> answerList) {
+	public void setAnswerList(Set<Answer> answerList) {
 		this.answerList = answerList;
 	}
    

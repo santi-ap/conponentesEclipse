@@ -1,6 +1,6 @@
 package com.ulatina.entity;
 
-import com.ulatina.entity.Option;
+import com.ulatina.entity.Choice;
 import java.io.Serializable;
 import java.lang.String;
 import javax.persistence.*;
@@ -16,10 +16,15 @@ public class Answer implements Serializable {
 	   
 	@Id
 	private int id;
-	private Option option;
+	@ManyToOne
+	@JoinColumn(name = "option_id", referencedColumnName="id")
+	private Choice choice;
 	private String answer;
 	private int anonymous_id;
 	private static final long serialVersionUID = 1L;
+	@ManyToOne
+	@JoinColumn(name = "question_id", referencedColumnName="id")
+	private Question question;
 
 	public Answer() {
 		super();
@@ -31,12 +36,12 @@ public class Answer implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}   
-	public Option getOption() {
-		return this.option;
+	public Choice getChoice() {
+		return this.choice;
 	}
 
-	public void setOption(Option option) {
-		this.option = option;
+	public void setChoice(Choice choice) {
+		this.choice = choice;
 	}   
 	public String getAnswer() {
 		return this.answer;

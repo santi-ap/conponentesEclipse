@@ -3,7 +3,7 @@
 	<persistence-unit name="compEclipse" transaction-type="RESOURCE_LOCAL">
 		<class>com.ulatina.entity.Answer</class>
 		<class>com.ulatina.entity.Form</class>
-		<class>com.ulatina.entity.Option</class>
+		<class>com.ulatina.entity.Choice</class>
 		<class>com.ulatina.entity.Question</class>
 		<class>com.ulatina.entity.Type</class>
 		<class>com.ulatina.entity.User</class>
@@ -14,7 +14,7 @@
 			<property name="javax.persistence.jdbc.password" value="123"/>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
 			
-			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
       		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 		</properties>
 	</persistence-unit>

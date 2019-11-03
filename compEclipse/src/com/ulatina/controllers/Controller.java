@@ -3,11 +3,12 @@ package com.ulatina.controllers;
 import javax.persistence.Persistence;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-public abstract class Controller implements ControllableEntity{
+public abstract class Controller{
 	private static EntityManagerFactory entityManagerFactory = null;
 	private static EntityManager em = null;
 	
@@ -37,15 +38,34 @@ public abstract class Controller implements ControllableEntity{
 		}
 	}
 	
-	@Override
-	abstract public ArrayList<Object> selectAll();
+	/**
+	 * This method will return a list of all the registers in a table. Each item in the list will be saved as an object
+	 * @return a list of all the registers in a table. Each item in the list will be saved as an object
+	 */
+	abstract public List<?> selectAll();
 	
-	@Override
+	/**
+	 * This method is used to select everything from one register, specified by the primary key
+	 * @param id primary key
+	 * @return an object which contains all the attributes(columns) of the chosen register
+	 */
 	abstract public Object selectRegister(String id);
+
+	/**
+	 * 
+	 * @param o object that needs updating
+	 */
+	abstract public void update(Object o);
 	
-	@Override
-	abstract public void update(String whichColumn, String newValue, String primaryColumn, String certainValue);
+	/**
+	 * 
+	 * @param o object to be deleted
+	 */
+	abstract public void delete(Object o);
 	
-	@Override
-	abstract public void delete(String primaryColumn, String certanValue);
+	/**
+	 * 
+	 * @param o the object to be added
+	 */
+	abstract public void insert (Object o);
 }

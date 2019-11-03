@@ -2,6 +2,8 @@ package com.ulatina.entity;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.Set;
+
 import javax.persistence.*;
 
 /**
@@ -13,9 +15,11 @@ import javax.persistence.*;
 public class Type implements Serializable {
 
 	   
-	@Id
+	@Id @GeneratedValue
 	private int id;
 	private String type;
+	@OneToMany (mappedBy="type", cascade = CascadeType.ALL)
+	private Set<Question> questionList;
 	private static final long serialVersionUID = 1L;
 
 	public Type() {
@@ -34,6 +38,12 @@ public class Type implements Serializable {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+	public Set<Question> getQuestionList() {
+		return questionList;
+	}
+	public void setQuestionList(Set<Question> questionList) {
+		this.questionList = questionList;
 	}
    
 }

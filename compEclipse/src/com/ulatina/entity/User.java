@@ -2,7 +2,7 @@ package com.ulatina.entity;
 
 import java.io.Serializable;
 import java.lang.String;
-import java.util.ArrayList;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -19,7 +19,8 @@ public class User implements Serializable {
 	private String email;
 	private String name;
 	private String password;
-	private ArrayList<Form> formList;
+	@OneToMany (mappedBy="user", cascade = CascadeType.ALL)
+	private Set<Form> formList;
 	private static final long serialVersionUID = 1L;
 
 	public User() {
@@ -46,10 +47,10 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public ArrayList<Form> getFormList() {
+	public Set<Form> getFormList() {
 		return formList;
 	}
-	public void setFormList(ArrayList<Form> formList) {
+	public void setFormList(Set<Form> formList) {
 		this.formList = formList;
 	}
    

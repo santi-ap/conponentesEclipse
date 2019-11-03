@@ -3,6 +3,7 @@ package com.ulatina.entity;
 import java.io.Serializable;
 import java.lang.String;
 import java.util.ArrayList;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -15,10 +16,15 @@ import javax.persistence.*;
 public class Form implements Serializable {
 
 	   
-	@Id
+	@Id @GeneratedValue
 	private int id;
 	private String title;
-	private ArrayList<Question> questionList;
+	@OneToMany (mappedBy="form", cascade = CascadeType.ALL)
+	private Set<Question> questionList;
+	@ManyToOne
+	@JoinColumn(name = "user_email", referencedColumnName="email")
+	private User user;
+
 	private static final long serialVersionUID = 1L;
 
 	public Form() {
@@ -38,11 +44,17 @@ public class Form implements Serializable {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public ArrayList<Question> getQuestionList() {
+	public Set<Question> getQuestionList() {
 		return questionList;
 	}
-	public void setQuestionList(ArrayList<Question> questionList) {
+	public void setQuestionList(Set<Question> questionList) {
 		this.questionList = questionList;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
    
 }
