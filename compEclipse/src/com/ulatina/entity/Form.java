@@ -2,9 +2,7 @@ package com.ulatina.entity;
 
 import java.io.Serializable;
 import java.lang.String;
-import java.util.ArrayList;
 import java.util.Set;
-
 import javax.persistence.*;
 
 /**

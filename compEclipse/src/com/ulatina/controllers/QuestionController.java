@@ -1,10 +1,10 @@
 package com.ulatina.controllers;
 
 import java.util.List;
-
 import javax.persistence.TypedQuery;
-
 import com.ulatina.entity.Question;
+
+@SuppressWarnings("finally")
 public class QuestionController extends Controller {
 
 	private TypedQuery<Question> query;
