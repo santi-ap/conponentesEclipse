@@ -1,6 +1,7 @@
 package com.ulatina.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -26,7 +27,7 @@ public class Choice implements Serializable {
 	private String choice;
 	private static final long serialVersionUID = 1L;
 	
-	@OneToMany (mappedBy="choice", cascade = CascadeType.MERGE)
+	@OneToMany (fetch = FetchType.EAGER, mappedBy="choice", cascade = CascadeType.MERGE)
 	private Set<Answer> answerList;
 
 	@ManyToOne
@@ -39,10 +40,12 @@ public class Choice implements Serializable {
 	}
 	public void setAnswerList(Set<Answer> answerList) {
 		this.answerList = answerList;
-	}
+	}  
+	
 	public Choice() {
-		super();
-	}   
+		this.setAnswerList(new HashSet<Answer>());
+	}
+	
 	public int getId() {
 		return this.id;
 	}

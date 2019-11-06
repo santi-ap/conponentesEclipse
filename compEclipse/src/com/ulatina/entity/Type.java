@@ -2,6 +2,7 @@ package com.ulatina.entity;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -25,12 +26,12 @@ public class Type implements Serializable {
 	@Id @GeneratedValue
 	private int id;
 	private String type;
-	@OneToMany (mappedBy="type", cascade = CascadeType.MERGE)
+	@OneToMany (fetch = FetchType.EAGER, mappedBy="type", cascade = CascadeType.MERGE)
 	private Set<Question> questionList;
 	private static final long serialVersionUID = 1L;
 
 	public Type() {
-		super();
+		this.setQuestionList(new HashSet<Question>());
 	}   
 	public int getId() {
 		return this.id;

@@ -4,54 +4,35 @@ package com.ulatina.testers;
 
 import javax.persistence.*;
 
+import com.ulatina.controllers.Controller;
+import com.ulatina.controllers.FormController;
+import com.ulatina.controllers.QuestionController;
+import com.ulatina.controllers.TypeController;
+import com.ulatina.entity.Form;
+import com.ulatina.entity.Question;
+import com.ulatina.entity.Type;
+
 
 public class SantiTester {
 	
+	public static void main(String[] args) {
+	
 
-
-
-		private static EntityManagerFactory entityManagerFactory = null;
-		private static EntityManager em = null;
-
-		public static void main(String[] args) {
-			try {
-				startEntityManagerFactory();
-				
-				
-				stopEntityManagerFactory();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		}
-
-		
-		
-		public static void startEntityManagerFactory() {
-			if (entityManagerFactory == null) {
-				try {
-					entityManagerFactory = Persistence
-							.createEntityManagerFactory("compEclipse");
-					em = entityManagerFactory.createEntityManager();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-		public static void stopEntityManagerFactory() {
-			if (entityManagerFactory != null) {
-				if (entityManagerFactory.isOpen()) {
-					try {
-						entityManagerFactory.close();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-				em.close();
-				entityManagerFactory = null;
-			}
-		}
-
+		Controller typeController = new TypeController();
+	    Controller questionController = new QuestionController();
+	    Controller formController = new FormController();
+	    
+	    Form testForm = (Form)formController.selectRegister("2");
+	
+		Type type = (Type)typeController.selectRegister("1");
+	    Question newQuestion = new Question();
+	    
+	    newQuestion.setType(type);
+	    newQuestion.setForm(testForm);
+	    testForm.getQuestionList().add(newQuestion);
+	    type.getQuestionList().add(newQuestion);
+	    
+	    questionController.insert(newQuestion);
+	}
 	
 }

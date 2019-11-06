@@ -2,6 +2,7 @@ package com.ulatina.entity;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 
@@ -24,7 +25,7 @@ public class Form implements Serializable {
 	@Id @GeneratedValue
 	private int id;
 	private String title;
-	@OneToMany (mappedBy="form", cascade = CascadeType.MERGE)
+	@OneToMany (fetch = FetchType.EAGER, mappedBy="form", cascade = CascadeType.MERGE)
 	private Set<Question> questionList;
 	@ManyToOne
 	@JoinColumn(name = "user_email", referencedColumnName="email")
@@ -33,7 +34,7 @@ public class Form implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public Form() {
-		super();
+		this.setQuestionList(new HashSet<Question>());
 	}   
 	public int getId() {
 		return this.id;

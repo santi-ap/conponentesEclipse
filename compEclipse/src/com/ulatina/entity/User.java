@@ -2,6 +2,7 @@ package com.ulatina.entity;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -26,12 +27,12 @@ public class User implements Serializable {
 	private String email;
 	private String name;
 	private String password;
-	@OneToMany (mappedBy="user", cascade = CascadeType.MERGE)
+	@OneToMany (fetch = FetchType.EAGER, mappedBy="user", cascade = CascadeType.MERGE)
 	private Set<Form> formList;
 	private static final long serialVersionUID = 1L;
 
 	public User() {
-		super();
+		this.setFormList(new HashSet<Form>());
 	}   
 	public String getEmail() {
 		return this.email;
