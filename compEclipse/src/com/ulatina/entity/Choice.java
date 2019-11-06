@@ -26,7 +26,7 @@ public class Choice implements Serializable {
 	private String choice;
 	private static final long serialVersionUID = 1L;
 	
-	@OneToMany (mappedBy="choice", cascade = CascadeType.ALL)
+	@OneToMany (mappedBy="choice", cascade = CascadeType.MERGE)
 	private Set<Answer> answerList;
 
 	@ManyToOne

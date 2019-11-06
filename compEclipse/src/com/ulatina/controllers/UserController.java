@@ -33,7 +33,7 @@ public class UserController extends Controller {
 		try {
 			this.startEntityManagerFactory();
 			this.user = this.getEm().createNamedQuery("User.findOne", User.class).
-					setParameter("param", Integer.parseInt(id)).getSingleResult();
+					setParameter("param", id).getSingleResult();
 			
 			
 		} catch (Exception e) {
@@ -105,8 +105,9 @@ public class UserController extends Controller {
 			} finally {
 				this.stopEntityManagerFactory();
 			}
-		}  else 
+		}  else {
 			System.out.print("Trying to use an invalid object, error.");
+		}
 	}
 
 }

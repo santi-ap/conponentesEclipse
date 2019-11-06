@@ -16,7 +16,7 @@ public abstract class Controller{
 	public void startEntityManagerFactory() {
 		if (entityManagerFactory == null) {
 			try {
-				entityManagerFactory = Persistence
+				entityManagerFactory = Persistence 
 						.createEntityManagerFactory("compEclipse");
 				em = entityManagerFactory.createEntityManager();
 			} catch (Exception e) {

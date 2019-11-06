@@ -26,7 +26,7 @@ public class User implements Serializable {
 	private String email;
 	private String name;
 	private String password;
-	@OneToMany (mappedBy="user", cascade = CascadeType.ALL)
+	@OneToMany (mappedBy="user", cascade = CascadeType.MERGE)
 	private Set<Form> formList;
 	private static final long serialVersionUID = 1L;
 

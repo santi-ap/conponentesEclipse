@@ -27,14 +27,14 @@ public class Question implements Serializable {
 	private int id;
 	private String question;
 	
-	@OneToMany (mappedBy="question", cascade = CascadeType.ALL)
+	@OneToMany (mappedBy="question", cascade = CascadeType.MERGE)
 	private Set<Choice> choiceList;
 	
 	@ManyToOne
 	@JoinColumn(name = "type_id", referencedColumnName="id")
 	private Type type;
 	
-	@OneToMany (mappedBy="question", cascade = CascadeType.ALL)
+	@OneToMany (mappedBy="question", cascade = CascadeType.MERGE)
 	private Set<Answer> answerList;
 	
 	@ManyToOne

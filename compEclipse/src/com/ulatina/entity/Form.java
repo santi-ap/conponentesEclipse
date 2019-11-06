@@ -24,7 +24,7 @@ public class Form implements Serializable {
 	@Id @GeneratedValue
 	private int id;
 	private String title;
-	@OneToMany (mappedBy="form", cascade = CascadeType.ALL)
+	@OneToMany (mappedBy="form", cascade = CascadeType.MERGE)
 	private Set<Question> questionList;
 	@ManyToOne
 	@JoinColumn(name = "user_email", referencedColumnName="email")
