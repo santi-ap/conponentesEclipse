@@ -2,7 +2,16 @@ package com.ulatina.controllers;
 
 
 import java.util.List;
+
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.exception.ConstraintViolationException;
+
 import com.ulatina.entity.User;
 
 @SuppressWarnings("finally")
@@ -100,15 +109,50 @@ public class UserController extends Controller {
 				this.getEm().persist(o);
 				this.getEm().getTransaction().commit();
 				
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				this.stopEntityManagerFactory();
+			} catch (PersistenceException e) {
+				if (e.getCause() instanceof ConstraintViolationException) {
+					ConstraintViolationException exception = (ConstraintViolationException) e.getCause();
+					if (exception.getSQLException().getMessage().contains(" for key 'email'")) {
+						System.out.println("this email is already register in our system.");
+				
+					} else {
+						exception.printStackTrace();
+					}
+				} else {
+					e.printStackTrace();
+					
+				}
+				this.getEm().getTransaction().rollback();
+				
 			}
-		}  else {
-			System.out.print("Trying to use an invalid object, error.");
 		}
 	}
+			
+			
+	public User loginClient(String email, String password) {
+		User usuario = null;
+		try {
+			this.startEntityManagerFactory();
+			Session session = this.getEm().unwrap(Session.class);
+			Criteria criteria = session.createCriteria(User.class);
+			criteria.add(Restrictions.eq("email", email));
+			usuario = (User) criteria.uniqueResult();
+			this.stopEntityManagerFactory();
+		} catch (NonUniqueResultException e) {
+			e.printStackTrace();
+		}
 
+		if (usuario == null) {
+			System.out.println("user not register on our sysytem!");
+		} else if (usuario.ValidPassword(password)) {
+			System.out.println("Welcome " + usuario.getName());
+		} else {
+			System.out.println("invalid Password!");
+		}
+		
+		return usuario;
+	
+
+}
 }
 

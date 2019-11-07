@@ -55,6 +55,9 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public boolean ValidPassword(String password) {
+		return this.password.equals(password);
+	}
 	public Set<Form> getFormList() {
 		return formList;
 	}
